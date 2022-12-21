@@ -1,0 +1,28 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: api-deployment
+spec:
+  selector:
+    matchLabels:
+      app: api
+  template:
+    metadata:
+      labels:
+        app: api
+    spec:
+      containers:
+      - name: api
+        image: anderws10/go-products:v1.0.1
+        ports:
+        - containerPort: 8000
+        imagePullPolicy: Always
+        env:
+          - name: DB_HOST
+            value: "postgres-service"
+          - name: DB_USER
+            value: "master"
+          - name: DB_PASSWORD
+            value: "s3cr3t"
+          - name: DB_NAME
+            value: "products"
