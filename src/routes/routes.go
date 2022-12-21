@@ -6,6 +6,10 @@ import (
 )
 
 func Setup(app *fiber.App) {
+
+	appUp =: app.Group("/", controllers.AppUp)
+	appHealth =: app.Group("/health", controllers.AppHealth)
+
 	api := app.Group("api/v1")
 
 	api.Post("products", controllers.Insert)
