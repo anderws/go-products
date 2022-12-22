@@ -17,12 +17,17 @@ spec:
         ports:
         - containerPort: 8000
         imagePullPolicy: Always
+        envFrom:
+          - configMapRef:
+              name: api-configmap
         env:
-          - name: DB_HOST
-            value: "postgres-service"
           - name: DB_USER
-            value: "master"
+            valueFrom:
+              secretKeyRef:
+                key: POSTGRES_USER
+                name: postgresdb-secret
           - name: DB_PASSWORD
-            value: "s3cr3t"
-          - name: DB_NAME
-            value: "products"
+            valueFrom:
+              secretKeyRef:
+                key: POSTGRES_PASSWORD
+                name: postgresdb-secret

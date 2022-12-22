@@ -16,10 +16,8 @@ spec:
         image: postgres
         ports:
         - containerPort: 5432
-        env:
-          - name: POSTGRES_DB
-            value: products
-          - name: POSTGRES_USER
-            value: master
-          - name: POSTGRES_PASSWORD
-            value: s3cr3t
+        envFrom:
+          - configMapRef:
+              name: postgresdb-configmap
+          - secretRef:
+              name: postgresdb-secret
